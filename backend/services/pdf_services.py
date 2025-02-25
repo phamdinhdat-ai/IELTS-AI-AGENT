@@ -12,6 +12,12 @@ import ollama
 from langchain_ollama import OllamaEmbeddings
 from langchain_ollama import ChatOllama
 from langchain_text_splitters.character import RecursiveCharacterTextSplitter
+from langchain.prompts import ChatPromptTemplate
+from langchain_community.embeddings import OllamaEmbeddings
+from langchain_community.chat_models import ChatOllama
+from langchain_community.vectorstores import Chroma
+from langchain.schema.runnable import RunnablePassthrough
+from langchain.schema.output_parser import StrOutputParser
 # from langchain_text_splitters.word import RecursiveWordTextSplitter
 import time 
 class DocumentPDFLoader(BaseLoader):
@@ -94,5 +100,41 @@ for chunk in document_chunks:
     print("===============================================")
     print("\n")
 
-embedding = OllamaEmbeddings(model="nomic-embed-text:latest")
-llm = ChatOllama(name="deepseek-r1:1.5b ")
+# def split_documents(documents, chunk_size=1000, chunk_overlap=20):
+#     text_split = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
+#     chunks = text_split.split_documents(documents)
+#     return chunks
+
+print(f"Total number of chunks: {len(document_chunks)}")
+print("\n")
+embeddings = OllamaEmbeddings(model="nomic-embed-text", temperature=0.4)
+
+db = Chroma.from_documents(document_chunks, embeddings, collection_name = "local-rag")
+
+retriever = db.as_retriever()
+
+template = """You are an assistant for question-answering tasks.
+Use the following pieces of retrieved context to answer the question:
+If you don't know the answer, then answer from your own knowledge and dont give just one word answer, and dont tell the user that you are answering from your knowledge.
+Use three sentences maximum and keep the answer concise.
+
+Question: {question}
+Context: {context}
+Answer:
+
+"""
+prompt = ChatPromptTemplate.from_template(template)
+
+local_model = "deepseek-r1:1.5b" #Enter your preferred model here
+llm = ChatOllama(model=local_model)
+
+rag_chain = (
+        {"context": retriever,  "question": RunnablePassthrough()}
+        | prompt
+        | llm
+        | StrOutputParser()
+)
+
+while True:
+    query = str(input("Enter Question: "))
+    print(rag_chain.invoke(query))
