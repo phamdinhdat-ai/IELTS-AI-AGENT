@@ -1,0 +1,50 @@
+{
+  "builder_name": "csv",
+  "citation": "",
+  "config_name": "default",
+  "dataset_name": "ielts_essay_human_feedback",
+  "dataset_size": 13696201,
+  "description": "",
+  "download_checksums": {
+    "hf://datasets/chillies/IELTS_essay_human_feedback@6dafdca5338a88ef93c9aa710ede5f68312c3ae5/ielts_essay_evaluation_human_feedback.csv": {
+      "num_bytes": 13769854,
+      "checksum": null
+    }
+  },
+  "download_size": 13769854,
+  "features": {
+    "prompt": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "essay": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "chosen": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "rejected": {
+      "dtype": "string",
+      "_type": "Value"
+    }
+  },
+  "homepage": "",
+  "license": "",
+  "size_in_bytes": 27466055,
+  "splits": {
+    "test": {
+      "name": "test",
+      "num_bytes": 13696201,
+      "num_examples": 1762,
+      "dataset_name": "ielts_essay_human_feedback"
+    }
+  },
+  "version": {
+    "version_str": "0.0.0",
+    "major": 0,
+    "minor": 0,
+    "patch": 0
+  }
+}
