@@ -1,11 +1,11 @@
 import datasets 
-from utils import formatting_prompts_func
+from backend.agents.utils.utils import formatting_prompts_func
 from unsloth import FastLanguageModel
 import torch
 from unsloth import PatchDPOTrainer
 from transformers import TrainingArguments
 from trl import DPOTrainer
-from prompts import WRITTING_TASK2_PROMPT
+from backend.agents.prompts.training_prompts import WRITTING_TASK2_PROMPT
 
 PatchDPOTrainer()
 
@@ -84,4 +84,4 @@ inputs = tokenizer(
 from transformers import TextStreamer
 text_streamer = TextStreamer(tokenizer)
 output = model.generate(**inputs, streamer = text_streamer, max_new_tokens = 2048)
-print(output)
+# print(output)

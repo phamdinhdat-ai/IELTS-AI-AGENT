@@ -1,5 +1,5 @@
 from datasets import load_dataset
-from  prompts import WRITTING_TASK2_PROMPT
+from  backend.agents.prompts.training_prompts import WRITTING_TASK2_PROMPT
 
 local_dir = "data/"
 ds = load_dataset("chillies/IELTS_essay_human_feedback")
