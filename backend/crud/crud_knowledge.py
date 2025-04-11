@@ -7,8 +7,8 @@ from sqlalchemy.dialects.postgresql import JSONB # For JSONB operations
 
 # Import pgvector operators for similarity search
 # Choose one based on your index/preference (L2/IP/Cosine)
-from pgvector.sqlalchemy import Vector, l2_distance, max_inner_product, cosine_distance
-
+# from pgvector.sqlalchemy import Vector, l2_distance, max_inner_product, cosine_distance
+# from langchain_community.vectorstores.pgvector import
 from db.models.knowledge import KnowledgeChunk, AccessLevel
 from db.models.user import UserRole
 from schemas.knowledge import KnowledgeChunkCreate # Used for ingestion

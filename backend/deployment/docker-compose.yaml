@@ -1,0 +1,103 @@
+version: '3.8'
+
+services:
+  # --- PostgreSQL Database with pgvector ---
+  db:
+    image: pgvector/pgvector:pg16 # Use official pgvector image (choose PG version)
+    container_name: knowledge_db_service
+    environment:
+      # !!! Use secrets management in production instead of env vars here !!!
+      POSTGRES_USER: ${POSTGRES_USER:-knowledge_user} # Use env var from host or default
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-your_secure_password} # Use env var from host or default
+      POSTGRES_DB: ${POSTGRES_DB:-knowledge_db} # Use env var from host or default
+    volumes:
+      - postgres_data:/var/lib/postgresql/data # Persist database data
+    ports:
+      - "5433:5432" # Map host port 5433 to container port 5432 to avoid conflicts
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"] # Use double $$ for env vars in CMD-SHELL
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - rag_network
+
+  # --- KnowledgeSphere API Service ---
+  api:
+    build:
+      context: . # Build from the current directory's Dockerfile
+      dockerfile: Dockerfile
+    container_name: knowledge_api_service
+    depends_on:
+      db: # Wait for DB to be healthy before starting API
+        condition: service_healthy
+      # ollama: # Uncomment if running Ollama as a service below
+      #   condition: service_started # Or add a healthcheck to Ollama service
+    ports:
+      - "${API_PORT:-8000}:8000" # Map host port (from .env or default 8000) to container 8000
+    volumes:
+      # Optional: Mount code for development hot-reloading (remove for production build)
+      - ./app:/app/app
+      - ./alembic:/app/alembic
+      - ./alembic.ini:/app/alembic.ini
+      # Mount data directory for ingestion script access if needed INSIDE container (usually run separately)
+      - ./data_to_ingest:/app/data_to_ingest:ro
+      # pass # Use pass if no volumes needed for production image
+    environment:
+      # Pass environment variables needed by the application
+      # These override any values set in the Dockerfile ENV directive
+      - DATABASE_URL=postgresql+psycopg://${POSTGRES_USER:-knowledge_user}:${POSTGRES_PASSWORD:-your_secure_password}@db:5432/${POSTGRES_DB:-knowledge_db} # Connect to 'db' service name
+      - SECRET_KEY=${SECRET_KEY:-change_this_to_a_very_strong_random_secret_key}
+      - ACCESS_TOKEN_EXPIRE_MINUTES=${ACCESS_TOKEN_EXPIRE_MINUTES:-60}
+      - ALGORITHM=${ALGORITHM:-HS256}
+      - EMBEDDING_MODEL_NAME=${EMBEDDING_MODEL_NAME:-sentence-transformers/bge-base-en-v1.5}
+      - EMBEDDING_DIMENSION=${EMBEDDING_DIMENSION:-768}
+      - CHUNK_SIZE=${CHUNK_SIZE:-500}
+      - CHUNK_OVERLAP=${CHUNK_OVERLAP:-50}
+      - RAG_RETRIEVER_K=${RAG_RETRIEVER_K:-3}
+      # Point to Ollama service name if running in Compose, otherwise use host.docker.internal/localhost setup
+      - OLLAMA_BASE_URL=${OLLAMA_BASE_URL:-http://ollama:11434} # Default to service name 'ollama'
+      - OLLAMA_MODEL=${OLLAMA_MODEL:-mistral}
+      - LLM_TEMPERATURE=${LLM_TEMPERATURE:-0.1}
+      - BACKEND_CORS_ORIGINS_STR=${BACKEND_CORS_ORIGINS_STR:-http://localhost:8000} # Pass CORS string
+    # --- GPU Access for API Container (if embedding happens here & needs GPU) ---
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1 # Request 1 GPU
+    #           capabilities: [gpu]
+    networks:
+      - rag_network
+
+  # --- Optional: Ollama Service (if not running on host) ---
+  # ollama:
+  #   image: ollama/ollama:latest
+  #   container_name: knowledge_ollama_service
+  #   ports:
+  #     - "11434:11434"
+  #   volumes:
+  #     - ollama_data:/root/.ollama # Persist downloaded models
+  #   # --- GPU Access for Ollama Container ---
+  #   deploy:
+  #     resources:
+  #       reservations:
+  #         devices:
+  #           - driver: nvidia
+  #             # Ensure nvidia-container-toolkit is installed on host
+  #             count: all # Assign all available GPUs
+  #             capabilities: [gpu]
+  #   networks:
+  #     - rag_network
+  #   # Optional: Add healthcheck for Ollama if available
+
+volumes:
+  postgres_data: # Define named volume for PostgreSQL persistence
+    driver: local
+  # ollama_data: # Define named volume for Ollama model persistence
+  #   driver: local
+
+networks:
+  rag_network: # Define the network
+    driver: bridge

@@ -8,10 +8,10 @@ class Settings(BaseSettings):
     API_V1_STR: str = "/api/v1"
 
     # --- Database ---
-    DATABASE_URL: str
+    DATABASE_URL: str = "postgresql+psycopg://datpd1:datpd1@localhost:5432/knowledge_db"
 
     # --- Security ---
-    SECRET_KEY: str
+    SECRET_KEY: str = "datpd1"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
     ALGORITHM: str = "HS256"
 
@@ -23,8 +23,8 @@ class Settings(BaseSettings):
     RAG_RETRIEVER_K: int = 3
 
     # --- LLM ---
-    OLLAMA_BASE_URL: AnyHttpUrl # Validate as URL
-    OLLAMA_MODEL: str = "mistral"
+    OLLAMA_BASE_URL: AnyHttpUrl="http://localhost:11434"
+    OLLAMA_MODEL: str = "llama3.1"
     LLM_TEMPERATURE: float = 0.1
 
     # --- CORS ---

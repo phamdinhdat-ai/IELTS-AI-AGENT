@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -20,9 +20,9 @@
 <body>
     <div class="container mt-4">
         <h2 class="text-center mb-4">KnowledgeSphere RAG Chatbot</h2>
-        <div id="chatbox">
+        <div id="chatbox"> -->
             <!-- Chat messages will appear here -->
-        </div>
+        <!-- </div>
         <div id="loading" class="text-center">Processing...</div>
         <div id="error" class="text-center"></div>
         <div class="input-group mb-3">
@@ -33,4 +33,41 @@
 
     <script src="script.js"></script>
 </body>
-</html>
+</html> -->
+
+
+<!-- Add this section ABOVE the existing chat container -->
+<div class="container mt-2" id="authArea">
+    <div id="userStatus" class="text-end mb-2">Not logged in.</div>
+    <div id="loginArea">
+        <h4>Login</h4>
+        <form id="loginForm">
+            <div class="mb-2">
+                <label for="emailInput" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="emailInput" required>
+            </div>
+            <div class="mb-2">
+                <label for="passwordInput" class="form-label">Password</label>
+                <input type="password" class="form-control" id="passwordInput" required>
+            </div>
+            <button type="submit" class="btn btn-success" id="loginButton">Login</button>
+            <div id="authError" class="text-danger mt-2" style="display: none;"></div>
+        </form>
+    </div>
+    <button id="logoutButton" class="btn btn-danger mt-2" style="display: none;">Logout</button>
+    <hr/>
+</div>
+
+<!-- Wrap existing chat elements in a div -->
+<div id="chatArea" style="display: none;"> <!-- Initially hidden -->
+    <h2 class="text-center mb-4">KnowledgeSphere RAG Chatbot</h2>
+    <div id="chatbox">
+        <!-- Chat messages will appear here -->
+    </div>
+    <div id="loading" class="text-center">Processing...</div>
+    <div id="error" class="text-center text-danger" style="display: none;"></div> <!-- Added text-danger -->
+    <div class="input-group mb-3">
+        <input type="text" id="userInput" class="form-control" placeholder="Ask a question..." aria-label="User input">
+        <button class="btn btn-primary" type="button" id="sendButton">Send</button>
+    </div>
+</div>

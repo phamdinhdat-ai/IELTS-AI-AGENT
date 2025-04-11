@@ -47,3 +47,15 @@
 2025-04-11 16:23:45,231 - INFO - Retrieving history for session 'session_1744362711108_48row65z7wc'
 2025-04-11 16:23:45,245 - INFO - Retrieved 3 documents for query.
 2025-04-11 16:23:52,997 - INFO - Generated answer for session 'session_1744362711108_48row65z7wc': The Github profile of Pham Dinh Dat is https://github.com/phamdinhdat-ai....
+2025-04-11 17:14:26,797 - INFO - Starting Uvicorn server on 0.0.0.0:8765
+2025-04-11 17:14:26,812 - INFO - Application startup: Initializing models and vector DB...
+2025-04-11 17:14:26,812 - INFO - Loading existing vector store from: chroma_db_persist
+2025-04-11 17:14:29,913 - INFO - PyTorch version 2.5.1 available.
+2025-04-11 17:14:30,094 - INFO - Load pretrained SentenceTransformer: embed_models/sentence_transformer_model
+2025-04-11 17:14:30,547 - INFO - Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+2025-04-11 17:14:30,647 - INFO - Vector DB loaded.
+2025-04-11 17:14:30,647 - INFO - Initializing LLM (Model: llama3.1, Base URL: http://localhost:11434)
+2025-04-11 17:14:39,030 - INFO - LLM connection successful.
+2025-04-11 17:14:39,030 - INFO - Setting up RAG chain...
+2025-04-11 17:14:39,031 - INFO - RAG chain setup complete.
+2025-04-11 17:14:39,031 - INFO - Startup complete. API is ready.
