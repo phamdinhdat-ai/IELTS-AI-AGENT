@@ -1,0 +1,45 @@
+fastapi
+uvicorn[standard]
+langchain # Pin Langchain version for stability
+langchain-community
+langchain-core
+chromadb==0.5.0 # Pin ChromaDB version
+sentence-transformers # For local embeddings
+pypdf # Example loader, add others if needed (python-docx, etc.)
+unstructured # For more robust document loading
+python-dotenv # For environment variables
+httpx # For making requests to Ollama if not using langchain wrapper directly
+ollama # Official Ollama Python client (optional, Langchain has integration)
+python-multipart
+
+
+# Base Web Framework
+fastapi
+uvicorn[standard]
+
+# Database & ORM
+sqlalchemy[asyncio]>=2.0
+psycopg[binary,pool] # Async PostgreSQL driver
+alembic
+pgvector # pgvector integration with SQLAlchemy
+
+# Authentication & Security
+python-jose[cryptography]
+passlib[bcrypt]
+
+# Embeddings & LLM Orchestration
+langchain==0.1.16 # Pinning for stability
+langchain-community
+langchain-core
+sentence-transformers # For local embeddings
+ollama # Official Ollama client
+
+# Configuration & Utilities
+pydantic>=2.0
+pydantic-settings
+python-dotenv
+
+# Document Loaders (add more as needed)
+pypdf
+unstructured[local-inference] # For diverse doc types, local inference optional
+# Add: python-docx, beautifulsoup4, etc. if needed

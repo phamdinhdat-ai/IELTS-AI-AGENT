@@ -1,0 +1,49 @@
+2025-04-11 16:20:10,394 - INFO - Starting Uvicorn server on 0.0.0.0:8765
+2025-04-11 16:20:10,409 - INFO - Application startup: Initializing models and vector DB...
+2025-04-11 16:20:10,409 - INFO - Loading existing vector store from: chroma_db_persist
+2025-04-11 16:20:13,497 - INFO - PyTorch version 2.5.1 available.
+2025-04-11 16:20:13,646 - INFO - Load pretrained SentenceTransformer: embed_models/sentence_transformer_model
+2025-04-11 16:20:14,419 - INFO - Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+2025-04-11 16:20:14,516 - INFO - Vector DB loaded.
+2025-04-11 16:20:14,516 - INFO - Initializing LLM (Model: llama3.1, Base URL: http://localhost:11434)
+2025-04-11 16:20:21,244 - INFO - LLM connection successful.
+2025-04-11 16:20:21,245 - INFO - Setting up RAG chain...
+2025-04-11 16:20:21,246 - INFO - RAG chain setup complete.
+2025-04-11 16:20:21,246 - INFO - Startup complete. API is ready.
+2025-04-11 16:21:30,027 - INFO - Received query for session 'session_1744362711108_48row65z7wc': hi
+2025-04-11 16:21:30,027 - INFO - Retrieving history for session 'session_1744362711108_48row65z7wc'
+2025-04-11 16:21:30,061 - INFO - Retrieved 3 documents for query.
+2025-04-11 16:21:33,100 - INFO - Generated answer for session 'session_1744362711108_48row65z7wc': What can I help you with?...
+2025-04-11 16:22:03,315 - INFO - Received query for session 'session_1744362711108_48row65z7wc': tell me about pham dih dat
+2025-04-11 16:22:03,315 - INFO - Retrieving history for session 'session_1744362711108_48row65z7wc'
+2025-04-11 16:22:03,346 - INFO - Retrieved 3 documents for query.
+2025-04-11 16:22:05,896 - INFO - Generated answer for session 'session_1744362711108_48row65z7wc': I don't know....
+2025-04-11 16:22:23,432 - INFO - Starting Uvicorn server on 0.0.0.0:8765
+2025-04-11 16:22:23,448 - INFO - Application startup: Initializing models and vector DB...
+2025-04-11 16:22:23,687 - INFO - Loading documents from data
+2025-04-11 16:22:23,688 - INFO - Loaded 1 text documents.
+2025-04-11 16:22:23,688 - INFO - Splitting 10 documents into chunks (size: 500, overlap: 50)
+2025-04-11 16:22:23,689 - INFO - Created 40 chunks.
+2025-04-11 16:22:23,689 - INFO - Initializing vector store with model: embed_models/sentence_transformer_model
+2025-04-11 16:22:26,937 - INFO - PyTorch version 2.5.1 available.
+2025-04-11 16:22:27,096 - INFO - Load pretrained SentenceTransformer: embed_models/sentence_transformer_model
+2025-04-11 16:22:27,685 - INFO - Creating new vector store in: chroma_db_persist
+2025-04-11 16:22:27,699 - INFO - Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+2025-04-11 16:22:28,668 - INFO - Vector store created and persisted.
+2025-04-11 16:22:28,668 - INFO - Initializing LLM (Model: llama3.1, Base URL: http://localhost:11434)
+2025-04-11 16:22:35,365 - INFO - LLM connection successful.
+2025-04-11 16:22:35,365 - INFO - Setting up RAG chain...
+2025-04-11 16:22:35,366 - INFO - RAG chain setup complete.
+2025-04-11 16:22:35,366 - INFO - Startup complete. API is ready.
+2025-04-11 16:22:41,410 - INFO - Received query for session 'session_1744362711108_48row65z7wc': hi
+2025-04-11 16:22:41,411 - INFO - Retrieving history for session 'session_1744362711108_48row65z7wc'
+2025-04-11 16:22:41,421 - INFO - Retrieved 3 documents for query.
+2025-04-11 16:22:46,362 - INFO - Generated answer for session 'session_1744362711108_48row65z7wc': It looks like we just had a greeting. What would you like to know or discuss?...
+2025-04-11 16:23:06,614 - INFO - Received query for session 'session_1744362711108_48row65z7wc': tell me about pham dinh dat
+2025-04-11 16:23:06,614 - INFO - Retrieving history for session 'session_1744362711108_48row65z7wc'
+2025-04-11 16:23:06,634 - INFO - Retrieved 3 documents for query.
+2025-04-11 16:23:17,371 - INFO - Generated answer for session 'session_1744362711108_48row65z7wc': Pham Dinh Dat is a research student at SSA Lab, Phenikaa University in Hanoi. He has been engaged in...
+2025-04-11 16:23:45,231 - INFO - Received query for session 'session_1744362711108_48row65z7wc': give github profile of him
+2025-04-11 16:23:45,231 - INFO - Retrieving history for session 'session_1744362711108_48row65z7wc'
+2025-04-11 16:23:45,245 - INFO - Retrieved 3 documents for query.
+2025-04-11 16:23:52,997 - INFO - Generated answer for session 'session_1744362711108_48row65z7wc': The Github profile of Pham Dinh Dat is https://github.com/phamdinhdat-ai....

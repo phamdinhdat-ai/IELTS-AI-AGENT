@@ -1,0 +1,52 @@
+knowledge_sphere_agentic/
+├── alembic/                 # Alembic migration files
+├── alembic.ini              # Alembic configuration
+├── app/                     # Main application code
+│   ├── __init__.py
+│   ├── api/                 # API Routers
+│   │   ├── __init__.py
+│   │   ├── endpoints/
+│   │   │   ├── __init__.py
+│   │   │   ├── auth.py
+│   │   │   └── chat.py
+│   │   └── deps.py          # Dependency injection functions
+│   ├── core/                # Core logic & config
+│   │   ├── __init__.py
+│   │   ├── config.py        # Settings management
+│   │   └── security.py      # Password hashing, JWT handling
+│   ├── crud/                # Database interaction functions
+│   │   ├── __init__.py
+│   │   └── crud_user.py
+│   │   └── crud_chat.py
+│   │   └── crud_knowledge.py
+│   ├── db/                  # Database setup
+│   │   ├── __init__.py
+│   │   ├── base.py          # Base model and session setup
+│   │   └── models/
+│   │       ├── __init__.py
+│   │       ├── user.py
+│   │       └── chat.py
+│   │       └── knowledge.py
+│   ├── schemas/             # Pydantic models for API validation/serialization
+│   │   ├── __init__.py
+│   │   ├── user.py
+│   │   └── token.py
+│   │   └── chat.py
+│   │   └── knowledge.py
+│   ├── services/            # Business logic / RAG pipeline
+│   │   ├── __init__.py
+│   │   └── rag_service.py
+│   └── main.py              # FastAPI app instance creation
+├── data_to_ingest/          # Place documents here for ingestion
+│   ├── public/
+│   │   └── public_faq.txt
+│   └── internal/
+│       └── internal_specs.pdf
+├── static/                  # Frontend files (needs updating for auth)
+│   ├── index.html
+│   └── script.js
+├── .env                     # Environment variables
+├── Dockerfile
+├── docker-compose.yml
+├── ingest_data.py           # Script to process and ingest data
+└── requirements.txt
