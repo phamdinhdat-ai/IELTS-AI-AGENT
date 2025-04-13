@@ -1,11 +1,12 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KnowledgeSphere Chat</title>
+    <title>KnowledgeSphere Agent Chat</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
     <style>
+        /* (Keep previous CSS) */
         body { background-color: #f8f9fa; }
         #chatbox { height: 60vh; overflow-y: auto; border: 1px solid #ccc; margin-bottom: 1rem; padding: 1rem; background-color: white; }
         .message { margin-bottom: 0.5rem; padding: 0.5rem; border-radius: 0.5rem; }
@@ -15,59 +16,51 @@
         .source-item { margin-bottom: 0.3rem; white-space: pre-wrap; word-wrap: break-word; max-height: 100px; overflow-y: auto; background-color: #f8f9fa; padding: 5px; border: 1px solid #eee;}
         #loading { display: none; }
         #error { color: red; display: none; }
+        /* #login-section { Initially visible } */
+        #chat-section { display: none; /* Initially hidden */ }
     </style>
 </head>
 <body>
     <div class="container mt-4">
-        <h2 class="text-center mb-4">KnowledgeSphere RAG Chatbot</h2>
-        <div id="chatbox"> -->
-            <!-- Chat messages will appear here -->
-        <!-- </div>
-        <div id="loading" class="text-center">Processing...</div>
-        <div id="error" class="text-center"></div>
-        <div class="input-group mb-3">
-            <input type="text" id="userInput" class="form-control" placeholder="Ask a question..." aria-label="User input">
-            <button class="btn btn-primary" type="button" id="sendButton">Send</button>
+        <h2 class="text-center mb-4">KnowledgeSphere Agent Chatbot</h2>
+
+        <!-- Login Section -->
+        <div id="login-section">
+            <h4 class="text-center">Login</h4>
+            <div id="login-error" class="alert alert-danger" style="display: none;"></div>
+            <form id="loginForm">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Login</button>
+            </form>
+             <p class="mt-2 text-muted small">Test users: alice_a (pw: password_a), bob_b (pw: password_b)</p>
         </div>
+
+        <!-- Chat Section (Initially Hidden) -->
+        <div id="chat-section">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <span id="welcome-message">Welcome!</span>
+                <button id="logoutButton" class="btn btn-sm btn-outline-secondary">Logout</button>
+            </div>
+            <div id="chatbox">
+                <!-- Chat messages will appear here -->
+            </div>
+            <div id="loading" class="text-center">Processing...</div>
+            <div id="error" class="text-center text-danger" style="display: none;"></div>
+            <div class="input-group mb-3">
+                <input type="text" id="userInput" class="form-control" placeholder="Ask a question..." aria-label="User input">
+                <button class="btn btn-primary" type="button" id="sendButton">Send</button>
+            </div>
+        </div>
+
     </div>
 
     <script src="script.js"></script>
 </body>
-</html> -->
-
-
-<!-- Add this section ABOVE the existing chat container -->
-<div class="container mt-2" id="authArea">
-    <div id="userStatus" class="text-end mb-2">Not logged in.</div>
-    <div id="loginArea">
-        <h4>Login</h4>
-        <form id="loginForm">
-            <div class="mb-2">
-                <label for="emailInput" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="emailInput" required>
-            </div>
-            <div class="mb-2">
-                <label for="passwordInput" class="form-label">Password</label>
-                <input type="password" class="form-control" id="passwordInput" required>
-            </div>
-            <button type="submit" class="btn btn-success" id="loginButton">Login</button>
-            <div id="authError" class="text-danger mt-2" style="display: none;"></div>
-        </form>
-    </div>
-    <button id="logoutButton" class="btn btn-danger mt-2" style="display: none;">Logout</button>
-    <hr/>
-</div>
-
-<!-- Wrap existing chat elements in a div -->
-<div id="chatArea" style="display: none;"> <!-- Initially hidden -->
-    <h2 class="text-center mb-4">KnowledgeSphere RAG Chatbot</h2>
-    <div id="chatbox">
-        <!-- Chat messages will appear here -->
-    </div>
-    <div id="loading" class="text-center">Processing...</div>
-    <div id="error" class="text-center text-danger" style="display: none;"></div> <!-- Added text-danger -->
-    <div class="input-group mb-3">
-        <input type="text" id="userInput" class="form-control" placeholder="Ask a question..." aria-label="User input">
-        <button class="btn btn-primary" type="button" id="sendButton">Send</button>
-    </div>
-</div>
+</html>
