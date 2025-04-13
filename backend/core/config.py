@@ -16,7 +16,7 @@ class Settings(BaseSettings):
     ALGORITHM: str = "HS256"
 
     # --- Models & RAG ---
-    EMBEDDING_MODEL_NAME: str = "sentence-transformers/bge-base-en-v1.5"
+    EMBEDDING_MODEL_NAME: str = "Alibaba-NLP/gte-multilingual-base"
     EMBEDDING_DIMENSION: int = 768 # Must match the model!
     CHUNK_SIZE: int = 500
     CHUNK_OVERLAP: int = 50
@@ -24,7 +24,7 @@ class Settings(BaseSettings):
 
     # --- LLM ---
     OLLAMA_BASE_URL: AnyHttpUrl="http://localhost:11434"
-    OLLAMA_MODEL: str = "llama3.1"
+    OLLAMA_MODEL: str = "llama3.2:1b"
     LLM_TEMPERATURE: float = 0.1
 
     # --- CORS ---
