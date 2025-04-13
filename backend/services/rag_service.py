@@ -10,7 +10,9 @@ from crud import crud_knowledge, crud_chat # crud_chat will be created next
 from schemas.chat import ChatMessageCreate, SourceDocument # Import necessary schemas
 
 # Langchain and Model Loading (Load once, reuse)
-from langchain_community.embeddings import HuggingFaceEmbeddings
+# from langchain_community.embeddings import HuggingFaceEmbeddings
+# from langchain_huggingface.embeddings import HuggingFaceEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.chat_models import ChatOllama
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
@@ -28,8 +30,8 @@ try:
     encode_kwargs = {'normalize_embeddings': True} # Normalize for cosine similarity
     embedding_model = HuggingFaceEmbeddings(
         model_name=settings.EMBEDDING_MODEL_NAME,
-        model_kwargs={'device': 'cpu'}, # Change to 'cuda' if needed
-        encode_kwargs=encode_kwargs
+        model_kwargs={'device': 'cpu', 'trust_remote_code':True}, # Change to 'cuda' if needed
+        encode_kwargs=encode_kwargs,
     )
     logger.info("Embedding model loaded successfully.")
 
@@ -40,7 +42,7 @@ try:
         temperature=settings.LLM_TEMPERATURE
     )
     # Perform a quick test invocation during initialization
-    # llm.invoke("Initialize test") # Can be slow, consider optional/async startup check
+    llm.invoke("Initialize test") # Can be slow, consider optional/async startup check
     logger.info("LLM initialized (connection test skipped in service init).")
 
 except Exception as e:

@@ -18,8 +18,8 @@ fastapi
 uvicorn[standard]
 
 # Database & ORM
-sqlalchemy[asyncio]>=2.0
-psycopg[binary,pool] # Async PostgreSQL driver
+sqlalchemy[asyncio]
+# psycopg[binary,pool] # Async PostgreSQL driver
 alembic
 pgvector # pgvector integration with SQLAlchemy
 
@@ -28,14 +28,9 @@ python-jose[cryptography]
 passlib[bcrypt]
 
 # Embeddings & LLM Orchestration
-langchain==0.1.16 # Pinning for stability
-langchain-community
-langchain-core
-sentence-transformers # For local embeddings
-ollama # Official Ollama client
 
 # Configuration & Utilities
-pydantic>=2.0
+pydantic[all]
 pydantic-settings
 python-dotenv
 
