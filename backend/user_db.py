@@ -72,4 +72,33 @@ def add_user(user_data: UserCreate) -> UserInDB:
     fake_users_db[user_data.username] = user_in_db
     return user_in_db
 
+
+def update_user(username: str, user_data: UserBase) -> UserInDB:
+    """Updates an existing user in the fake DB."""
+    user = get_user(username)
+    if not user:
+        raise ValueError(f"User '{username}' not found.")
+
+    # Update fields
+    for field, value in user_data.model_dump(exclude_unset=True).items():
+        setattr(user, field, value)
+
+    fake_users_db[username] = user
+    return user
+def delete_user(username: str) -> bool:
+    """Deletes a user from the fake DB."""
+    if username in fake_users_db:
+        del fake_users_db[username]
+        return True
+    return False
+# --- CRUD Operations ---
+# CRUD operations would typically be in a separate file
+# but are included here for simplicity.
+def create_user(user: UserCreate) -> UserInDB:
+    """Creates a new user."""
+    return add_user(user)
+
+def read_user(username: str) -> Optional[UserInDB]:
+    """Reads a user by username."""
+    return get_user(username)
 # Add more functions as needed (update_user, delete_user, etc.)

@@ -13,7 +13,7 @@ from user_db import UserInDB, get_user # Import simulated DB functions
 
 # --- Configuration ---
 # !! Use environment variables for secrets in production !!
-SECRET_KEY = os.getenv("SECRET_KEY", "your-super-secret-key-that-is-long-and-random") # CHANGE THIS!
+SECRET_KEY = os.getenv("SECRET_KEY", "datiuthuha") 
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 

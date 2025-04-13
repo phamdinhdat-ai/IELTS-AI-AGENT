@@ -12,7 +12,9 @@ from fastapi import FastAPI, HTTPException, Request, Header, Depends # Added Dep
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordRequestForm # For login form data
-from pydantic import BaseModel
+# from pydantic import BaseModel
+from langchain_core.pydantic_v1 import BaseModel # Use langchain_core for Pydantic
+
 from fastapi import status
 # Langchain components (as before)
 from langchain_community.document_loaders import DirectoryLoader, TextLoader
@@ -21,7 +23,9 @@ from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import Chroma
 from langchain_community.chat_models import ChatOllama
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
-from langchain.agents import AgentExecutor, create_react_agent
+from langchain.agents.react.agent import create_react_agent
+from langchain.agents import AgentExecutor
+
 from langchain_community.chat_message_histories import ChatMessageHistory
 from langchain.memory import ConversationBufferMemory
 from langchain_core.runnables import RunnableConfig
