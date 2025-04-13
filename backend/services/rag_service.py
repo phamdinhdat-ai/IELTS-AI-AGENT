@@ -37,8 +37,8 @@ try:
 
     logger.info(f"Initializing LLM: {settings.OLLAMA_MODEL} at {settings.OLLAMA_BASE_URL}")
     llm = ChatOllama(
-        model=settings.OLLAMA_MODEL,
-        base_url=str(settings.OLLAMA_BASE_URL), # Pydantic URL needs casting back to str
+        model= str(settings.OLLAMA_MODEL),
+        # base_url= str(settings.OLLAMA_BASE_URL), # Pydantic URL needs casting back to str
         temperature=settings.LLM_TEMPERATURE
     )
     # Perform a quick test invocation during initialization
